@@ -1,0 +1,29 @@
+{
+  "title":			"apps_catalog_categories",
+  "type":           "apps",
+  "vendor":			"Catalog",
+  "is_free":   "yes",
+  "is_core": "yes",
+  "website_link_to_sell" : "",
+  "version":			1.0,
+  "req_core_version":	3.0,
+  "license":			"GPL 2 - MIT",
+  "tag":			    "catalog, categories",
+  "install":            "includes/ClicShopping/Apps/Catalog/",
+  "module_directory":   "",
+  "apps_name":          "Categories",
+  "type_module":      "Fixe",
+  "dependance":       "",
+  "description":        "This apps allow you to manage the products categories",
+  "image":            "ModuleInfosJson/image.png",
+
+  "authors": [
+    {
+      "name":		    "ClicShopping Team",
+      "company":	    "Innov-concept",
+      "email":	      "",
+      "website":	    "http://www.clicshopping.com",
+      "Community":	  "http://www.clicshopping.org"
+    }
+  ]
+}
