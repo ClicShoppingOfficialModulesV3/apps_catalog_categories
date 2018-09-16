@@ -1,10 +1,13 @@
 <?php
 /**
- * Categories.php
- * @copyright Copyright 2008 - http://www.innov-concept.com
- * @Brand : ClicShopping(Tm) at Inpi all right Reserved
- * @license GPL 2 License & MIT Licencse
-*/
+ *
+ *  @copyright 2008 - https://www.clicshopping.org
+ *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
+ *  @Licence GPL 2 & MIT
+ *  @licence MIT - Portion of osCommerce 2.4
+ *
+ *
+ */
 
   namespace ClicShopping\Apps\Catalog\Categories\Module\HeaderTags;
 
@@ -45,10 +48,17 @@
     }
 
     public function getOutput() {
-      global $current_category_id;
-
       $CLICSHOPPING_Template = Registry::get('Template');
       $CLICSHOPPING_Language = Registry::get('Language');
+      $CLICSHOPPING_Category = Registry::get('Category');
+
+
+      if (!defined('CLICSHOPPING_APP_CATEGORIES_CT_STATUS') || CLICSHOPPING_APP_CATEGORIES_CT_STATUS == 'False') {
+        return false;
+      }
+
+
+      $current_category_id = $CLICSHOPPING_Category->getPath();
 
       if (CLICSHOPPING::getBaseNameIndex()) {
 
@@ -116,10 +126,6 @@
             } else {
               $tags_array['keywords'] = $Qcategories->value('categories_head_keywords_tag') . ', ' . $categories_name_clean;
             }
-
-            $tags_array['title'] = HTML::sanitize($Qsubmit->value('submit_defaut_language_title'));
-            $tags_array['desc'] = HTML::sanitize($Qsubmit->value('submit_defaut_language_description'));
-            $tags_array['keywords'] = HTML::sanitize($Qsubmit->value('submit_defaut_language_keywords'));
 
             $title = $CLICSHOPPING_Template->setTitle($tags_array['title'] . ', ' . $CLICSHOPPING_Template->getTitle());
             $description = $CLICSHOPPING_Template->setDescription($tags_array['desc'] . ', ' . $CLICSHOPPING_Template->getDescription());

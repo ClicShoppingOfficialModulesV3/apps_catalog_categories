@@ -1,10 +1,12 @@
 <?php
 /**
- * category.php
- * @copyright Copyright 2008 - http://www.innov-concept.com
- * @Brand : ClicShopping(Tm) at Inpi all right Reserved
- * @license GPL 2 License & MIT Licencse
-
+ *
+ *  @copyright 2008 - https://www.clicshopping.org
+ *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
+ *  @Licence GPL 2 & MIT
+ *  @licence MIT - Portion of osCommerce 2.4
+ *
+ *
  */
 
   namespace ClicShopping\Apps\Catalog\Categories\Classes\Shop;
@@ -164,7 +166,6 @@
  * string current_category_id =  the current categry id
  * @return string the new path
  */
-// osc_get_path
     public function getPathCategories($current_category_id = '') {
       $cPath_array = $this->getPathArray();
 
@@ -302,7 +303,6 @@
  * string , $category_id, id of category
  * @access public
  * @return number of the product in the main category
- * osc_has_category_subcategories
  */
 
     public function getHasSubCategories($category_id) {
@@ -323,7 +323,6 @@
  * string , $subcategories_array, id of category
  * string  $parent_id, id of the parent category
  * @access public
- * osc_get_subcategories
  */
     public function getSubcategories(&$subcategories_array, $parent_id = 0) {
       $Qsub = $this->db->prepare('select categories_id
@@ -348,7 +347,6 @@
  * string  $parent_id, id of the parent category
  * string $indent, options
  * @access public
- * osc_get_subcategories
  */
 
     public function getCategories($categories_array = '', $parent_id = '0', $indent = '') {
@@ -382,11 +380,13 @@
       return $categories_array;
     }
 
-/*
-* Recursively go through the categories and retreive all parent categories IDs
-* TABLES: categories
-* osc_get_parent_categories
-*/
+
+/**
+ * Recursively go through the categories and retreive all parent categories IDs
+ * @param $categories
+ * @param $categories_id
+ * @return bool
+ */
     public function getParentCategories(&$categories, $categories_id) {
 
       $Qparent = $this->db->prepare('select parent_id
@@ -408,12 +408,11 @@
       }
     }
 
-
-/*
-* Construct a category path to the product
-* TABLES: products_to_categories
-* osc_get_product_path
-*/
+/**
+ * Construct a category path to the product
+ * @param $products_id
+ * @return string
+ */
     public function getProductPath($products_id) {
       $cPath = '';
 

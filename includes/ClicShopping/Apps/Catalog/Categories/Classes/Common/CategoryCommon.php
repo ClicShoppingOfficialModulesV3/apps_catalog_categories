@@ -1,10 +1,12 @@
 <?php
 /**
- * CategoryCommon.php
- * @copyright Copyright 2008 - http://www.innov-concept.com
- * @Brand : ClicShopping(Tm) at Inpi all right Reserved
- * @license GPL 2 License & MIT Licencse
- 
+ *
+ *  @copyright 2008 - https://www.clicshopping.org
+ *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
+ *  @Licence GPL 2 & MIT
+ *  @licence MIT - Portion of osCommerce 2.4
+ *
+ *
  */
 
   namespace ClicShopping\Apps\Catalog\Categories\Classes\Common;
@@ -16,7 +18,6 @@
 * Parse and secure the cPath parameter values
 * @int, $cPath, value of cpath
 * return @ string array $tmp_array
-* osc_parse_category_path
 */
     public function getParseCategoryPath($cPath) {
 // make sure the category IDs are integers

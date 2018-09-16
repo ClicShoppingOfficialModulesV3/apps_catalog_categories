@@ -1,10 +1,13 @@
 <?php
-/*
- * Install.php
- * @copyright Copyright 2008 - http://www.innov-concept.com
- * @Brand : ClicShopping(Tm) at Inpi all right Reserved
- * @license GPL 2 License & MIT Licencse
-*/
+/**
+ *
+ *  @copyright 2008 - https://www.clicshopping.org
+ *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
+ *  @Licence GPL 2 & MIT
+ *  @licence MIT - Portion of osCommerce 2.4
+ *
+ *
+ */
 
   namespace ClicShopping\Apps\Catalog\Categories\Sites\ClicShoppingAdmin\Pages\Home\Actions\Configure;
 
@@ -96,6 +99,8 @@ CREATE TABLE :table_categories (
   date_added datetime,
   last_modified datetime,
   virtual_categories tinyint(1) default(0) not_null,
+  status tinyint(0) default(0) not_null,
+  customers_group_id int default (99) not null
   PRIMARY KEY (categories_id),
   KEY idx_categories_parent_id parent_id)
 ) CHARSET=utf8 COLLATE=utf8_unicode_ci;
