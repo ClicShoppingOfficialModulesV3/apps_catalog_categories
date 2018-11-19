@@ -137,6 +137,34 @@
                 <td><?php echo '<a href="' . $CLICSHOPPING_Categories->link('Categories&' . $CLICSHOPPING_CategoriesAdmin->getCategoriesPath($Qcategories->valueInt('categories_id'))) . '">' . HTML::image($CLICSHOPPING_Template->getImageDirectory() . 'icons/folder.gif', $CLICSHOPPING_Categories->getDef('icon_folder')); ?></td>
                 <td colspan="2"></td>
                 <td><?php echo '<strong>' . $Qcategories->value('categories_name') . '</strong>'; ?></td>
+
+
+
+
+
+
+
+
+                <td class="text-md-center">
+<?php
+  /*
+    if ($Qproducts->valueInt('products_status') == 1) {
+      echo HTML::link($CLICSHOPPING_Products->link('Categories&SetFlag&flag=0&pID=' . $Qproducts->valueInt('products_id') . '&cPath=' . $cPath),'<i class="fas fa-check fa-lg" aria-hidden="true"></i>');
+    } else {
+      echo HTML::link($CLICSHOPPING_Products->link('Categories&SetFlag&flag=1&pID=' . $Qproducts->valueInt('products_id') . '&cPath=' . $cPath),'<i class="fas fa-times fa-lg" aria-hidden="true"></i>');
+    }
+  */
+  echo '<i class="fas fa-check fa-lg" aria-hidden="true"></i>';
+?>
+                </td>
+
+
+
+
+
+
+
+
 <?php
       if (!is_null($Qcategories->value('last_modified'))) {
         echo '<td class="text-md-center">' . DateTime::toShort($Qcategories->value('last_modified')) .'</td>';
