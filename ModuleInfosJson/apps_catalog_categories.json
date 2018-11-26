@@ -10,7 +10,7 @@
   "license":			"GPL 2 - MIT",
   "tag":			    "catalog, categories",
   "install":            "includes/ClicShopping/Apps/Catalog/",
-  "module_directory":   "",
+  "module_directory":   "Products",
   "apps_name":          "Categories",
   "type_module":      "Fixe",
   "dependance":       "",
