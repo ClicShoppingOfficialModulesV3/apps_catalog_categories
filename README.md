@@ -20,5 +20,16 @@ http://monsite/myAdmin/index.php?A&Catalog\Categories
 
 See Marketplace for all informations
 
+All informations about the CliCshopping
 
-![quickupdate](https://github.com/ClicShoppingOfficialModulesV3/apps_catalog_categories/blob/master/ModuleInfosJson/image.png)
+ Community : https://www.clicshopping.org
+
+ Software : https://github.com/ClicShopping
+
+ Official add on : https://github.com/ClicShoppingOfficialModulesV3
+
+ Community add on : https://github.com/ClicShoppingV3Community
+
+ trademark License info : https://www.clicshopping.org/forum/trademark/ 
+ 
+![image](https://github.com/ClicShoppingOfficialModulesV3/apps_catalog_categories/blob/master/ModuleInfosJson/image.png)
