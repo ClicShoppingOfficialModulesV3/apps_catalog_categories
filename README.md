@@ -20,7 +20,7 @@ http://monsite/myAdmin/index.php?A&Catalog\Categories
 
 See Marketplace for all informations
 
-All informations about the CliCshopping
+All informations about the ClicShopping
 
  Community : https://www.clicshopping.org
 
