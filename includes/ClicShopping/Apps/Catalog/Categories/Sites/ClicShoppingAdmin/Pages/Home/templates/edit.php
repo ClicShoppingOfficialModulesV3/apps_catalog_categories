@@ -1,5 +1,5 @@
 <?php
-  /**
+/**
  *
  *  @copyright 2008 - https://www.clicshopping.org
  *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
@@ -188,7 +188,7 @@
 ?>
             </div>
             <div class="separator"></div>
-            <div class="alert alert-info" role="alert">
+            <div class="alert alert-info role="alert"">
               <div><?php echo HTML::image($CLICSHOPPING_Template->getImageDirectory() . 'icons/help.gif', $CLICSHOPPING_Categories->getDef('title_help_description')) . ' ' . $CLICSHOPPING_Categories->getDef('title_help_description'); ?></div>
               <div class="separator"></div>
               <div><?php echo $CLICSHOPPING_Categories->getDef('title_help_description'); ?></div>

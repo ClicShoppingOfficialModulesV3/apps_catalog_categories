@@ -13,7 +13,6 @@
 
   use ClicShopping\OM\Registry;
 
-
   class Edit extends \ClicShopping\OM\PagesActionsAbstract {
     public function execute() {
       $CLICSHOPPING_Categories = Registry::get('Categories');

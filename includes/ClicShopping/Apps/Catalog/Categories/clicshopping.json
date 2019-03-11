@@ -2,7 +2,7 @@
  "title":	"Categories App",
  "app": "Categories",
  "vendor":"Catalog",
- "version":	"1.0.1",
+ "version":	"1.0.2",
  "req_core_version":	"3.0",
  "license":	"GPL-2",
  "authors": [
@@ -21,6 +21,9 @@
    "ClicShoppingAdmin/Langues": {
     "DeleteConfirm":	"Module\\Hooks\\ClicShoppingAdmin\\Langues\\DeleteConfirm",
     "Insert":	"Module\\Hooks\\ClicShoppingAdmin\\Langues\\Insert"
+   },
+   "ClicShoppingAdmin/Stats": {
+     "StatsCategories":	"Module\\Hooks\\ClicShoppingAdmin\\Stats\\StatsCategories"
    },
    "ClicShoppingAdmin/Products": {
     "ProductsContentTab1":	"Module\\Hooks\\ClicShoppingAdmin\\Products\\ProductsContentTab1"
