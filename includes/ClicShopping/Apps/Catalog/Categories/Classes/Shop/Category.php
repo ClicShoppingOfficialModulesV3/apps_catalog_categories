@@ -218,7 +218,6 @@
             }
           }
 
-//          $cPath_new .= '_' . $current_category_id;
           $cPath_new .= '' . $current_category_id;
 
           if (substr($cPath_new, 0, 1) == '_') {

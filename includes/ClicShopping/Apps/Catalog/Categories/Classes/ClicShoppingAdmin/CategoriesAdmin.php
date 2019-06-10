@@ -281,8 +281,6 @@
 
       $QcategoriesImage->execute();
 
-
-// Controle si l'image est utilise sur une autre categorie
       $QduplicateImage = $this->db->prepare('select count(*) as total
                                              from :table_categories
                                              where categories_image = :categories_image
@@ -291,45 +289,6 @@
 
       $QduplicateImage->execute();
 
-// Controle si l'image est utilise sur une autre categorie du blog
-      $QduplicateBlogImage = $this->db->prepare('select count(*) as total
-                                                  from :table_blog_categories
-                                                  where blog_categories_image = :blog_categories_image
-                                                ');
-      $QduplicateBlogImage->bindValue(':blog_categories_image', $QcategoriesImage->value('categories_image'));
-
-      $QduplicateBlogImage->execute();
-
-// Controle si l'image est utilise sur les descriptions d'un blog
-      $QduplicateImageBlogCategoriesDescription = $this->db->prepare('select count(*) as total
-                                                                     from :table_blog_categories_description
-                                                                     where blog_categories_description like :blog_categories_description
-                                                                    ');
-      $QduplicateImageBlogCategoriesDescription->bindValue(':blog_categories_description', '%' . $QcategoriesImage->value('categories_image') . '%');
-
-      $QduplicateImageBlogCategoriesDescription->execute();
-
-// Controle si l'image est utilise le visuel d'un produit
-      $QduplicateImageCatalog = $this->db->prepare('select count(*) as total
-                                                    from :table_products
-                                                    where products_image = :products_image
-                                                    or products_image_zoom = :products_image_zoom
-                                                   ');
-      $QduplicateImageCatalog->bindValue(':products_image', $QcategoriesImage->value('categories_image'));
-      $QduplicateImageCatalog->bindValue(':products_image_zoom', $QcategoriesImage->value('categories_image'));
-
-      $QduplicateImageCatalog->execute();
-
-// Controle si l'image est utilise sur les descriptions d'un produit
-      $QduplicateImageProductDescription = $this->db->prepare('select count(*) as total
-                                                               from :table_products_description
-                                                               where products_description like :blog_categories_description
-                                                              ');
-      $QduplicateImageProductDescription->bindValue(':blog_categories_description', '%' . $QcategoriesImage->value('categories_image') . '%');
-
-      $QduplicateImageProductDescription->execute();
-
-// Controle si l'image est utilisee sur une banniere
       $QduplicateImageBanners = $this->db->prepare('select count(*) as total
                                                     from :table_banners
                                                     where banners_image = :banners_image
@@ -338,7 +297,9 @@
 
       $QduplicateImageBanners->execute();
 
-// Controle si l'image est utilisee sur les fabricants
+//*******************************
+// Manufacturer
+//*******************************
       $QduplicateImageManufacturers = $this->db->prepare('select count(*) as total
                                                           from :table_manufacturers
                                                           where manufacturers_image = :manufacturers_image
@@ -347,7 +308,9 @@
 
       $QduplicateImageManufacturers->execute();
 
-// Controle si l'image est utilisee sur les fournisseurs
+//*******************************
+// Supplier
+//*******************************
       $QduplicateImageSuppliers = $this->db->prepare('select count(*) as total
                                                                   from :table_suppliers
                                                                   where suppliers_image = :suppliers_image
@@ -356,15 +319,22 @@
 
       $QduplicateImageSuppliers->execute();
 
+//*******************************
+// Products
+//*******************************
+      $QduplicateProductsImage = $this->db->prepare('select count(*) as total
+                                                          from :table_products
+                                                          where products_image = :products_image
+                                                         ');
+      $QduplicateProductsImage->bindValue(':products_image', $QcategoriesImage->value('categories_image'));
+
+      $QduplicateProductsImage->execute();
+
       if (($QduplicateImage->valueInt('total') < 2) &&
-        ($QduplicateBlogImage->valueInt('total') == 0) &&
-        ($QduplicateImageBlogCategoriesDescription->valueInt('total') == 0) &&
-        ($QduplicateImageCatalog->valueInt('total') == 0) &&
-        ($QduplicateImageProductDescription->valueInt('total') == 0) &&
         ($QduplicateImageBanners->valueInt('total') == 0) &&
         ($QduplicateImageManufacturers->valueInt('total') == 0) &&
-        ($QduplicateImageSuppliers->valueInt('total') == 0)) {
-
+        ($QduplicateImageSuppliers->valueInt('total') == 0) &&
+        ($QduplicateProductsImage->valueInt('total') == 0)) {
 // delete categorie image
         if (file_exists($this->template->getDirectoryPathTemplateShopImages() . $QcategoriesImage->value('categories_image'))) {
           @unlink($this->template->getDirectoryPathTemplateShopImages() . $QcategoriesImage->value('categories_image'));

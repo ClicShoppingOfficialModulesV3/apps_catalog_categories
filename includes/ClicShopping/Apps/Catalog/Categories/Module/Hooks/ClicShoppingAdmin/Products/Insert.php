@@ -59,15 +59,16 @@
       Cache::clear('upcoming');
     }
 
-
     public function execute()
     {
       if (!defined('CLICSHOPPING_APP_CATEGORIES_CT_STATUS') || CLICSHOPPING_APP_CATEGORIES_CT_STATUS == 'False') {
         return false;
       }
 
-      $current_category_id = HTML::sanitize($_POST['move_to_category_id']);
+      if (isset($_POST['move_to_category_id'])) {
+        $current_category_id = HTML::sanitize($_POST['move_to_category_id']);
 
-      $this->saveProductCategory($current_category_id);
+        $this->saveProductCategory($current_category_id);
+      }
     }
   }
