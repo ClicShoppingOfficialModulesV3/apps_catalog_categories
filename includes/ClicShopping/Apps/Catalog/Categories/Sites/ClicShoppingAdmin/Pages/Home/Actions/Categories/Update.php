@@ -30,7 +30,6 @@
 
       if (isset($_GET['cID'])) $categories_id = HTML::sanitize($_GET['cID']);
       if (isset($_POST['current_category_id'])) $categories_id = HTML::sanitize($_POST['current_category_id']);
-      if (isset($_GET['cPath'])) $cPath = HTML::sanitize($_GET['cPath']);
       if (isset($_POST['sort_order'])) $sort_order = HTML::sanitize($_POST['sort_order']);
       if (isset($_POST['move_to_category_id'])) $new_parent_id = HTML::sanitize($_POST['move_to_category_id']);
 
@@ -69,7 +68,7 @@
       }
 
 // Ajoute ou efface l'image dans la base de donees
-        if ($_POST['delete_image'] == 'yes') {
+        if (isset($_POST['delete_image'])) {
           $categories_image = '';
 
           $this->app->db->save('categories', ['categories_image' => $categories_image],
