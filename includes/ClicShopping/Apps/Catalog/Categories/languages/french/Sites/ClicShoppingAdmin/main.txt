@@ -5,7 +5,7 @@ module_ct_short_title = Catégories
 text_products_categories = Catégories
 text_configure =  Configurer App Module
 
-text_intro = Cette app vous permet d'installer unsystème de gestion d'categories des produits. <br /><br />
+text_intro = Cette app vous permet d'installer un système de gestion d'categories des produits. <br /><br />
 - Activer ce module. Pour y accéder, veuillez aller dans le Menus Produits/Catégoriess
 
 module_ct_introduction = Le processus d'installation installe le menu
@@ -107,7 +107,7 @@ text_categories_name_title = Nom de la catégorie
 text_categories_image = Image de la catégorie :
 text_sort_order = Ordre de tri :
 
-text_user_name = Créé / Modifié par :
+text_user_name = Par :
 
 text_categories_image_title = Image principale de la catégorie
 text_categories_image_vignette = Image vignette de la catégorie
@@ -177,5 +177,3 @@ description : le champs description, le nom du produit (blouson cuir), le nom du
 mots clefs : le champs mots clefs, le nom du produit (blouson cuir), le nom du produit découpé (blouson, cuir), le nom de la catégorie<br />
 </blockquote></li>
 <li><strong>veuillez à ne pas mettre trop de mots clefs (maximum 10)</strong> et établissez une cohérence entre chaque champs afin de retourver les mots les plus importants en premier</li>
-
-
