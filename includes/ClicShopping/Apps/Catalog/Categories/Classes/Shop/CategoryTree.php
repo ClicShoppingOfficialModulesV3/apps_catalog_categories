@@ -261,7 +261,8 @@
             $category_link = $category_id;
           }
 
-          $result = ['id' => $category_link,
+          $result = [
+            'id' => $category_link,
             'title' => str_repeat($this->spacer_string, $this->spacer_multiplier * $level) . $category['name']
           ];
 
@@ -322,7 +323,6 @@
      *
      * @return string
      */
-
     public function __toString()
     {
       return $this->getTree();
@@ -405,10 +405,8 @@
 
     /**
      * Calculate the number of products in each category
-     *
-     * @access protected
+     * @param bool $filter_active
      */
-
     protected function _calculateProductTotals($filter_active = true)
     {
       $totals = [];

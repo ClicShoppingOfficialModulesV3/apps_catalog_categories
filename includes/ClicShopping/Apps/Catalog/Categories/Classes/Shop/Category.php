@@ -19,20 +19,12 @@
   class Category
   {
     protected $_id;
-    protected $_title;
-    protected $_image;
+    protected string $_title;
+    protected string $_image;
     protected $_parent_id;
-    protected $_description;
-    protected $_category_depth;
-
-    /**
-     * An array containing the category information
-     *
-     * @var array
-     * @access protected
-     */
-
-    protected $_data = [];
+    protected string $_description;
+    protected string $_category_depth;
+    protected array $_data = [];
     protected $db;
     protected $lang;
     protected $categoryTree;
@@ -84,8 +76,6 @@
 
     /**
      * Return the ID of the assigned category
-     *
-     *
      * @return integer
      */
 
@@ -96,8 +86,6 @@
 
     /**
      * Return the description of the assigned category
-     *
-     *
      * @return string
      */
 
@@ -109,8 +97,6 @@
 
     /**
      * Return the title of the assigned category
-     *
-     *
      * @return string
      */
 
@@ -121,8 +107,6 @@
 
     /**
      * Check if the category has an image
-     *
-     *
      * @return string
      */
 
@@ -133,8 +117,6 @@
 
     /**
      * Return the image of the assigned category
-     *
-     *
      * @return string
      */
 
@@ -145,8 +127,6 @@
 
     /**
      * Check if the assigned category has a parent category
-     *
-     *
      * @return boolean
      */
 
@@ -157,8 +137,6 @@
 
     /**
      * Return the parent ID of the assigned category
-     *
-     *
      * @return integer
      */
 
@@ -169,8 +147,6 @@
 
     /**
      * Return the breadcrumb path of the assigned category
-     *
-     *
      * @return string
      */
 
@@ -181,8 +157,6 @@
 
     /**
      * Return the the path about the subcategory
-     *
-     *
      * string current_category_id =  the current categry id
      * @return string the new path
      */
@@ -198,15 +172,19 @@
         } else {
           $cPath_new = '';
 
-          $Qlast = $this->db->get('categories', 'parent_id', ['categories_id' => (int)$cPath_array[(count($cPath_array) - 1)],
-              'status' => 1
-            ]
-          );
+          $insert_sql = [
+            'categories_id' => (int)$cPath_array[(count($cPath_array) - 1)],
+            'status' => 1
+          ];
 
-          $Qcurrent = $this->db->get('categories', 'parent_id', ['categories_id' => (int)$current_category_id,
+          $Qlast = $this->db->get('categories', 'parent_id', $insert_sql);
+
+            $insert_sql = [
+              'categories_id' => (int)$current_category_id,
               'status' => 1
-            ]
-          );
+            ];
+
+            $Qcurrent = $this->db->get('categories', 'parent_id', $insert_sql);
 
           if ($Qlast->valueInt('parent_id') === $Qcurrent->valueInt('parent_id')) {
             for ($i = 0, $n = count($cPath_array) - 1; $i < $n; $i++) {
@@ -214,7 +192,6 @@
             }
           } else {
             for ($i = 0, $n = count($cPath_array); $i < $n; $i++) {
-//              $cPath_new .= '_' . $cPath_array[$i];
               $cPath_new .= $cPath_array[$i];
             }
           }
@@ -233,8 +210,6 @@
 
     /**
      * Return the breadcrumb path of the assigned category
-     *
-     *
      * @return string
      */
     public function getPathArray($id = null)
@@ -250,8 +225,6 @@
 
     /**
      * Return specific information from the assigned category
-     *
-     *
      * @return mixed
      */
 
@@ -263,8 +236,6 @@
 
     /**
      * Return deph the assigned category
-     *
-     *
      * @return mixed
      */
 
@@ -308,8 +279,6 @@
 
     /**
      * Return a numlber about listing related themain category
-     *
-     *
      * @return number of the product in the main category
      */
 
@@ -373,23 +342,21 @@
         $subcategories_array[count($subcategories_array)] = $Qsub->valueInt('categories_id');
 
         if ($Qsub->valueInt('categories_id') != $parent_id) {
-          static::getSubcategories($subcategories_array, $Qsub->valueInt('categories_id'));
+          $this->getSubcategories($subcategories_array, $Qsub->valueInt('categories_id'));
         }
       }
     }
 
-    /**
-     * Return all  categories
-     * string , $categories_array, id of category
-     * string  $parent_id, id of the parent category
-     * string $indent, options
-     *
-     */
+      /**
+       * Return all  categories
+       * @param null $categories_array
+       * @param int|null $parent_id
+       * @param string|null $indent
+       * @return array
+       */
 
-    public function getCategories($categories_array = '', $parent_id = '0', $indent = '')
+    public function getCategories(?array $categories_array = null, ?int $parent_id = 0, string $indent = '') :array
     {
-      if (!is_array($categories_array)) $categories_array = [];
-
       $Qcategories = $this->db->prepare('select c.categories_id,
                                                 cd.categories_name
                                         from :table_categories c,
@@ -402,17 +369,18 @@
                                         order by sort_order,
                                                  cd.categories_name
                                        ');
-      $Qcategories->bindInt(':parent_id', (int)$parent_id);
+      $Qcategories->bindInt(':parent_id', $parent_id);
       $Qcategories->bindInt(':language_id', $this->lang->getId());
       $Qcategories->execute();
 
       while ($Qcategories->fetch()) {
-        $categories_array[] = ['id' => $Qcategories->valueInt('categories_id'),
+        $array = [
+          'id' => $Qcategories->valueInt('categories_id'),
           'text' => $indent . $Qcategories->value('categories_name')
         ];
 
-        if ($Qcategories->valueInt('categories_id') != $parent_id) {
-          $categories_array = $this->getCategories($categories_array, $Qcategories->valueInt('categories_id'), $indent . '&nbsp;&nbsp;');
+        if ($Qcategories->valueInt('categories_id') !== $parent_id) {
+          $categories_array[] = $this->getCategories($array, $Qcategories->valueInt('categories_id'), $indent . '&nbsp;&nbsp;');
         }
       }
 
@@ -474,7 +442,6 @@
       $Qcategory->execute();
 
       if ($Qcategory->fetch() !== false) {
-
         $categories = [];
         $this->getParentCategories($categories, $Qcategory->valueInt('categories_id'));
 

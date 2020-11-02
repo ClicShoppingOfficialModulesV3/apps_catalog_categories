@@ -9,7 +9,6 @@
    *
    */
 
-
   namespace ClicShopping\Apps\Catalog\Categories\Sites\ClicShoppingAdmin\Pages\Home\Actions\Categories;
 
   use ClicShopping\OM\HTML;
@@ -29,7 +28,11 @@
       $CLICSHOPPING_Hooks = Registry::get('Hooks');
       $CLICSHOPPING_Language = Registry::get('Language');
 
-      if (isset($_GET['cPath'])) $cPath = HTML::sanitize($_GET['cPath']);
+      if (isset($_GET['cPath'])) {
+        $cPath = HTML::sanitize($_GET['cPath']);
+      } else {
+        $cPath = 0;
+      }
 
       $sort_order = HTML::sanitize($_POST['sort_order']);
 
@@ -55,7 +58,8 @@
 
         $language_id = $languages[$i]['id'];
 
-        $sql_data_array = ['categories_name' => HTML::sanitize($categories_name_array[$language_id]),
+        $sql_data_array = [
+          'categories_name' => HTML::sanitize($categories_name_array[$language_id]),
           'categories_description' => $_POST['categories_description'][$language_id],
           'categories_head_title_tag' => HTML::sanitize($_POST['categories_head_title_tag'][$language_id]),
           'categories_head_desc_tag' => HTML::sanitize($_POST['categories_head_desc_tag'][$language_id]),

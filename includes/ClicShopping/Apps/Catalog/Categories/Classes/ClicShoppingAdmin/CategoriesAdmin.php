@@ -18,8 +18,6 @@
 
   class CategoriesAdmin
   {
-
-    public $categorie;
     protected $lang;
     protected $template;
     protected $db;
@@ -33,16 +31,20 @@
     }
 
     /**
-     * @param null $keywords
+     * @param string $keywords
      * @return mixed
      */
-    public function getSearch(string $keywords = null)
+    public function getSearch(?string $keywords = null)
     {
       $current_category_id = 0;
-      if (isset($_POST['cPath'])) $current_category_id = HTML::sanitize($_POST['cPath']);
-      if (isset($_GET['cPath'])) $current_category_id = HTML::sanitize($_GET['cPath']);
 
-      if (isset($keywords) && !empty($keywords)) {
+      if (isset($_POST['cPath'])) {
+        $current_category_id = HTML::sanitize($_POST['cPath']);
+      } elseif (isset($_GET['cPath'])) {
+        $current_category_id = HTML::sanitize($_GET['cPath']);
+      }
+
+      if (!is_null($keywords)) {
         $search = HTML::sanitize($keywords);
 
         $Qcategories = $this->db->prepare('select SQL_CALC_FOUND_ROWS c.categories_id,
@@ -63,7 +65,7 @@
                                                    cd.categories_name
                                           limit :page_set_offset, :page_set_max_results
                                           ');
-        $Qcategories->bindInt(':language_id', (int)$this->lang->getId());
+        $Qcategories->bindInt(':language_id', $this->lang->getId());
         $Qcategories->bindValue(':search', '%' . $search . '%');
         $Qcategories->setPageSet((int)MAX_DISPLAY_SEARCH_RESULTS_ADMIN);
         $Qcategories->execute();
@@ -97,9 +99,7 @@
     }
 
     /**
-     * Return the breadcrumb path of the assigned category
-     *
-     *
+     * @param int|null $id
      * @return array
      */
     public function getPathArray(int $id = null): array
@@ -337,7 +337,7 @@
         ($QduplicateProductsImage->valueInt('total') == 0)) {
 // delete categorie image
         if (file_exists($this->template->getDirectoryPathTemplateShopImages() . $QcategoriesImage->value('categories_image'))) {
-          @unlink($this->template->getDirectoryPathTemplateShopImages() . $QcategoriesImage->value('categories_image'));
+          unlink($this->template->getDirectoryPathTemplateShopImages() . $QcategoriesImage->value('categories_image'));
         }
       }
 
@@ -449,16 +449,16 @@
       return $category_tree_array;
     }
 
-    /*
-     * getPath category path
-     * @int : id of category
-     * @return $cPath_new, the new path
-    */
-    public function getPath($current_category_id = '')
+    /**
+     * getPath
+     * @param string $current_category_id
+     * @return string
+     */
+    public function getPath(string $current_category_id = ''): string
     {
       $cPath_array = $this->getPathArray();
 
-      if ($current_category_id == '') {
+      if (empty($current_category_id)) {
         $cPath_new = implode('_', $cPath_array);
       } else {
         if (count($cPath_array) == 0) {
@@ -522,12 +522,12 @@
               'cd.categories_name',
               'c.parent_id'
             ], [
-                'c.categories_id' => [
+                  'c.categories_id' => [
                   'val' => $Qcategories->valueInt('categories_id'),
                   'rel' => 'cd.categories_id'
-                ],
-                'cd.language_id' => (int)$this->lang->getId()
-              ]
+                  ],
+                  'cd.language_id' => (int)$this->lang->getId()
+                ]
             );
 
             $categories_array[$index][] = ['id' => $Qcategories->valueInt('categories_id'),

@@ -9,7 +9,6 @@
    *
    */
 
-
   namespace ClicShopping\Apps\Catalog\Categories\Module\Hooks\ClicShoppingAdmin\Products;
 
   use ClicShopping\OM\Registry;
@@ -23,8 +22,9 @@
   class Update implements \ClicShopping\OM\Modules\HooksInterface
   {
     protected $app;
-    protected $productsAdmin;
-    protected $productsLink;
+    protected ProductsAdmin $productsAdmin;
+    protected string $productsLink;
+    protected string $currentCategoryId;
 
     public function __construct()
     {
@@ -48,10 +48,10 @@
     public function moveCategory($move_new_category, $id)
     {
       $QCheck = $this->app->db->prepare('select count(*)
-                                                    from :table_products_to_categories
-                                                    where products_id = :products_id
-                                                    and categories_id not in ( :categories_id )
-                                                  ');
+                                          from :table_products_to_categories
+                                          where products_id = :products_id
+                                          and categories_id not in ( :categories_id )
+                                        ');
       $QCheck->bindInt(':products_id', $id);
       $QCheck->bindInt(':categories_id', $move_new_category);
       $QCheck->execute();
@@ -76,7 +76,7 @@
 
       if (isset($_GET['Update'])) {
         if (isset($_POST['move_to_category_id'])) {
-        $new_category = HTML::sanitize($_POST['move_to_category_id']);
+          $new_category = HTML::sanitize($_POST['move_to_category_id']);
         } else {
           $new_category = null;
         }
@@ -103,13 +103,14 @@
 // just link the product another category
                     if ($this->productsLink == 'link') {
                       if ($this->currentCategoryId != $value_id) {
-                        $sql_array = ['products_id' => (int)$id,
+                        $sql_array = [
+                          'products_id' => (int)$id,
                           'categories_id' => (int)$value_id
                         ];
 
                         $this->app->db->save('products_to_categories', $sql_array);
                       } else {
-                        $CLICSHOPPING_MessageStack->add($this->app->getDef('error_cannot_link_to_same_category'), 'danger');
+                        $CLICSHOPPING_MessageStack->add($this->app->getDef('error_cannot_link_to_same_category'), 'error');
                       }
                     }
                   }
