@@ -65,9 +65,9 @@
       ?>
       <div class="tab-pane active" id="tab20">
         <div class="col-md-12 mainTitle">
-          <div class="float-md-left"><?php echo $CLICSHOPPING_Categories->getDef('text_categories_name'); ?></div>
+          <div class="float-start"><?php echo $CLICSHOPPING_Categories->getDef('text_categories_name'); ?></div>
           <div
-            class="float-md-right"><?php echo $CLICSHOPPING_Categories->getDef('text_user_name') . ' ' . AdministratorAdmin::getUserAdmin(); ?></div>
+            class="float-end"><?php echo $CLICSHOPPING_Categories->getDef('text_user_name') . ' ' . AdministratorAdmin::getUserAdmin(); ?></div>
         </div>
         <div class="adminformTitle">
           <div class="col-md-12">

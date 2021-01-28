@@ -98,9 +98,9 @@
         ?>
         <div class="tab-pane active" id="tab1">
           <div class="col-md-12 mainTitle">
-            <div class="float-md-left"><?php echo $CLICSHOPPING_Categories->getDef('text_products_name'); ?></div>
+            <div class="float-start"><?php echo $CLICSHOPPING_Categories->getDef('text_products_name'); ?></div>
             <div
-              class="float-md-right"><?php echo $CLICSHOPPING_Categories->getDef('text_user_name') . AdministratorAdmin::getUserAdmin(); ?></div>
+              class="float-end"><?php echo $CLICSHOPPING_Categories->getDef('text_user_name') . AdministratorAdmin::getUserAdmin(); ?></div>
           </div>
           <div class="adminformTitle" id="categoriesLanguage">
             <?php
@@ -352,8 +352,8 @@
                 <div class="adminformAide">
                   <div class="row">
                     <span
-                      class="col-md-4 text-md-center float-md-left"><?php echo HTMLOverrideAdmin::fileFieldImageCkEditor('categories_image', null, '300', '300'); ?></span>
-                    <span class="col-md-8 text-md-center float-md-right">
+                      class="col-md-4 text-md-center float-start"><?php echo HTMLOverrideAdmin::fileFieldImageCkEditor('categories_image', null, '300', '300'); ?></span>
+                    <span class="col-md-8 text-md-center float-end">
                         <div class="col-md-12">
                           <?php echo $CLICSHOPPING_ProductsAdmin->getInfoImage(null, $CLICSHOPPING_Categories->getDef('text_categories_image_vignette')); ?>
                         </div>
