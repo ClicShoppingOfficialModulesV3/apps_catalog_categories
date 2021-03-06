@@ -6,7 +6,7 @@
   "is_core": "yes",
   "website_link_to_sell" : "",
   "version":			"1.0.2",
-  "req_core_version":	3.0,
+  "req_core_version":	3.3,
   "license":			"GPL 2 - MIT",
   "tag":			    "catalog, categories",
   "install":            "includes/ClicShopping/Apps/Catalog/",

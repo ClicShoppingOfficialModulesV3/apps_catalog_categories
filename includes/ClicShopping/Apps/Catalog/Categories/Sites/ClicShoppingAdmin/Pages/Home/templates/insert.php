@@ -104,7 +104,7 @@
           </div>
           <div class="adminformTitle" id="categoriesLanguage">
             <?php
-              for ($i = 0, $n = count($languages); $i < $n; $i++) {
+              for ($i = 0, $n = \count($languages); $i < $n; $i++) {
                 ?>
                 <div class="row">
                   <div class="col-md-5">
@@ -161,7 +161,7 @@
           </div>
           <div class="adminformTitle">
             <?php
-              for ($i = 0, $n = count($languages); $i < $n; $i++) {
+              for ($i = 0, $n = \count($languages); $i < $n; $i++) {
                 ?>
                 <div class="row">
                   <div class="col-md-1">
@@ -222,38 +222,7 @@
       //          categories SEO      //-->
           // ---------------------------------------------------- //-->
         ?>
-        <!-- decompte caracteres -->
-        <script type="text/javascript">
-            $(document).ready(function () {
-              <?php
-              for ($i = 0, $n = count($languages); $i < $n; $i++) {
-              ?>
-                //default title
-                $("#default_title_<?php echo $i?>").charCount({
-                    allowed: 70,
-                    warning: 20,
-                    counterText: ' Max : '
-                });
-
-                //default_description
-                $("#default_description_<?php echo $i?>").charCount({
-                    allowed: 150,
-                    warning: 20,
-                    counterText: 'Max : '
-                });
-
-                //default tag
-                $("#default_tag_<?php echo $i?>").charCount({
-                    allowed: 70,
-                    warning: 20,
-                    counterText: ' Max : '
-                });
-              <?php
-              }
-              ?>
-            });
-        </script>
-        <div class="tab-pane" id="tab3">
+         <div class="tab-pane" id="tab3">
           <div class="col-md-12 mainTitle">
             <span><?php echo $CLICSHOPPING_Categories->getDef('text_products_page_seo'); ?></span>
           </div>
@@ -268,7 +237,7 @@
               </div>
             </div>
             <?php
-              for ($i = 0, $n = count($languages); $i < $n; $i++) {
+              for ($i = 0, $n = \count($languages); $i < $n; $i++) {
                 ?>
 
                 <div class="row">

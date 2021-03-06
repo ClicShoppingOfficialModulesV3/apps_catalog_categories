@@ -73,7 +73,7 @@
   $cPath_array = $CLICSHOPPING_CategoriesAdmin->getPathArray();
 
   if (isset($cPath_array) && count($cPath_array) > 0) {
-    for ($i = 0, $n = count($cPath_array) - 1; $i < $n; $i++) {
+    for ($i = 0, $n = \count($cPath_array) - 1; $i < $n; $i++) {
       if (empty($cPath_back)) {
         $cPath_back .= $cPath_array[$i];
       } else {
@@ -82,7 +82,7 @@
     }
   }
 
-  $cPath_back = (!is_null($cPath_back)) ? 'cPath=' . $cPath_back . '&' : '';
+  $cPath_back = (!\is_null($cPath_back)) ? 'cPath=' . $cPath_back . '&' : '';
 
   if (isset($_GET['search']) || isset($_POST['cPath'])) {
     echo HTML::button($CLICSHOPPING_Categories->getDef('button_back'), null, $CLICSHOPPING_Categories->link('Categories&' . $cPath_back . 'cID=' . $current_category_id), 'primary') . '&nbsp;';
@@ -122,6 +122,8 @@
   <table
     id="table"
     data-toggle="table"
+    data-icons-prefix="bi"
+    data-icons="icons"
     data-sort-name="sort_order"
     data-sort-order="asc"
     data-toolbar="#toolbar"
@@ -197,7 +199,7 @@
         </td>
         <td>
           <?php
-          if (!is_null($Qcategories->value('last_modified'))) {
+          if (!\is_null($Qcategories->value('last_modified'))) {
             echo  DateTime::toShort($Qcategories->value('last_modified'));
           }
           ?>
