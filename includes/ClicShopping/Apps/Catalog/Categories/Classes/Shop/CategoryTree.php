@@ -60,7 +60,7 @@
     protected $category_product_count_start_string = '&nbsp;(';
     protected $category_product_count_end_string = ')';
     protected $rewriteUrl;
-    protected $db;
+    protected mixed $db;
 
     /**
      * Constructor; load the category structure relationship data from the database

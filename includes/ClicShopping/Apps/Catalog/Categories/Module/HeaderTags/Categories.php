@@ -19,9 +19,9 @@
 
   class Categories extends \ClicShopping\OM\Modules\HeaderTagsAbstract
   {
-    protected $lang;
-    protected $app;
-    protected $template;
+    protected mixed $lang;
+    protected mixed $app;
+    protected mixed $template;
 
     protected function init()
     {
