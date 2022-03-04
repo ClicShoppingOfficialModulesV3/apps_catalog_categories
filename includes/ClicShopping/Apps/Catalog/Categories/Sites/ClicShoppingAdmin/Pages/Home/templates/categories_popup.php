@@ -42,7 +42,7 @@
           class="col-md-1 logoHeading"><?php echo HTML::image($CLICSHOPPING_Template->getImageDirectory() . 'categories/categorie.gif', $CLICSHOPPING_Categories->getDef('heading_title_categories'), '40', '40'); ?></span>
         <span
           class="col-md-7 pageHeading"><?php echo '&nbsp;' . $CLICSHOPPING_Categories->getDef('heading_title'); ?></span>
-        <span class="col-md-4 text-md-right">
+        <span class="col-md-4 text-end">
           <div><?php echo HTML::button($CLICSHOPPING_Categories->getDef('button_insert'), null, null, 'success', null, 'md', null, 'simple-post'); ?></div>
           <div id="simple-msg"></div>
          </span>
@@ -54,7 +54,7 @@
 <div>
   <ul class="nav nav-tabs flex-column flex-sm-row" role="tablist" id="myTab">
     <li
-      class="nav-item"><?php echo '<a href="#categoriesPopUp" role="tab" data-toggle="tab" class="nav-link active">' . $CLICSHOPPING_Categories->getDef('tab_general') . '</a>'; ?></li>
+      class="nav-item"><?php echo '<a href="#categoriesPopUp" role="tab" data-bs-toggle="tab" class="nav-link active">' . $CLICSHOPPING_Categories->getDef('tab_general') . '</a>'; ?></li>
   </ul>
   <div class="tabsClicShopping">
     <div class="tab-content">

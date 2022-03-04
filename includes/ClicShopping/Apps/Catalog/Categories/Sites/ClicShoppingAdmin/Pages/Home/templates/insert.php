@@ -66,7 +66,7 @@
             class="col-md-1 logoHeading"><?php echo HTML::image($CLICSHOPPING_Template->getImageDirectory() . 'categories/categorie.gif', $CLICSHOPPING_Categories->getDef('heading_title'), '40', '40'); ?></span>
           <span
             class="col-md-5 pageHeading"><?php echo '&nbsp;' . $CLICSHOPPING_Categories->getDef('heading_title'); ?></span>
-          <span class="col-md-6 text-md-right">
+          <span class="col-md-6 text-end">
 <?php
   echo HTML::hiddenField('categories_date_added', date('Y-m-d')) . HTML::button($CLICSHOPPING_Categories->getDef('button_update'), null, null, 'success') . ' ';
   echo HTML::button($CLICSHOPPING_Categories->getDef('button_cancel'), null, $CLICSHOPPING_Categories->link('Categories&cPath=' . $cPath . '&cID=' . $cID), 'warning');
@@ -81,13 +81,13 @@
   <div id="categoriesTabs" style="overflow: auto;">
     <ul class="nav nav-tabs flex-column flex-sm-row" role="tablist" id="myTab">
       <li
-        class="nav-item"><?php echo '<a href="#tab1" role="tab" data-toggle="tab" class="nav-link active">' . $CLICSHOPPING_Categories->getDef('tab_general') . '</a>'; ?></li>
+        class="nav-item"><?php echo '<a href="#tab1" role="tab" data-bs-toggle="tab" class="nav-link active">' . $CLICSHOPPING_Categories->getDef('tab_general') . '</a>'; ?></li>
       <li
-        class="nav-item"><?php echo '<a href="#tab2" role="tab" data-toggle="tab" class="nav-link">' . $CLICSHOPPING_Categories->getDef('tab_description') . '</a>'; ?></li>
+        class="nav-item"><?php echo '<a href="#tab2" role="tab" data-bs-toggle="tab" class="nav-link">' . $CLICSHOPPING_Categories->getDef('tab_description') . '</a>'; ?></li>
       <li
-        class="nav-item"><?php echo '<a href="#tab3" role="tab" data-toggle="tab" class="nav-link">' . $CLICSHOPPING_Categories->getDef('tab_ref') . '</a>'; ?></li>
+        class="nav-item"><?php echo '<a href="#tab3" role="tab" data-bs-toggle="tab" class="nav-link">' . $CLICSHOPPING_Categories->getDef('tab_ref') . '</a>'; ?></li>
       <li
-        class="nav-item"><?php echo '<a href="#tab4" role="tab" data-toggle="tab" class="nav-link">' . $CLICSHOPPING_Categories->getDef('tab_img') . '</a>'; ?></li>
+        class="nav-item"><?php echo '<a href="#tab4" role="tab" data-bs-toggle="tab" class="nav-link">' . $CLICSHOPPING_Categories->getDef('tab_img') . '</a>'; ?></li>
     </ul>
     <div class="tabsClicShopping">
       <div class="tab-content">
@@ -190,22 +190,24 @@
           <div class="alert alert-info" role="alert">
             <div><?php echo HTML::image($CLICSHOPPING_Template->getImageDirectory() . 'icons/help.gif', $CLICSHOPPING_Categories->getDef('title_help_description')) . ' ' . $CLICSHOPPING_Categories->getDef('title_help_description') ?></div>
             <div class="separator"></div>
+            <div><?php echo $CLICSHOPPING_Categories->getDef('title_help_description'); ?></div>
+            <div class="separator"></div>
             <div class="row">
                 <span class="col-md-12">
                  <?php echo $CLICSHOPPING_Categories->getDef('help_options'); ?>
-                  <blockquote><i><a data-toggle="modal"
-                                    data-target="#myModalWysiwyg2"><?php echo $CLICSHOPPING_Categories->getDef('text_help_wysiwyg'); ?></a></i></blockquote>
+                  <blockquote><i><a data-bs-toggle="modal"
+                                    data-bs-target="#myModalWysiwyg2"><?php echo $CLICSHOPPING_Categories->getDef('text_help_wysiwyg'); ?></a></i></blockquote>
                  <div class="modal fade" id="myModalWysiwyg2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                       aria-hidden="true">
                    <div class="modal-dialog">
                      <div class="modal-content">
                        <div class="modal-header">
-                         <button type="button" class="close" data-dismiss="modal"><span
+                         <button type="button" class="close" data-bs-dismiss="modal"><span
                              aria-hidden="true">&times;</span></button>
                          <h4 class="modal-title"
                              id="myModalLabel"><?php echo $CLICSHOPPING_Categories->getDef('text_help_wysiwyg'); ?></h4>
                        </div>
-                       <div class="modal-body text-md-center">
+                       <div class="modal-body text-center">
                          <img class="img-fluid"
                               src="<?php echo $CLICSHOPPING_Template->getImageDirectory() . '/wysiwyg.png'; ?>">
                        </div>
@@ -222,14 +224,14 @@
       //          categories SEO      //-->
           // ---------------------------------------------------- //-->
         ?>
-         <div class="tab-pane" id="tab3">
+        <div class="tab-pane" id="tab3">
           <div class="col-md-12 mainTitle">
             <span><?php echo $CLICSHOPPING_Categories->getDef('text_products_page_seo'); ?></span>
           </div>
           <div class="adminformTitle">
             <div class="spaceRow"></div>
             <div class="row">
-              <div class="col-md-12 text-md-center">
+              <div class="col-md-12 text-center">
                 <span class="col-md-3"></span>
                 <span class="col-md-3"><a href="https://www.google.fr/trends" target="_blank"
                                           rel="noreferrer"><?php echo $CLICSHOPPING_Categories->getDef('keywords_google_trend'); ?></a></span>
@@ -239,7 +241,6 @@
             <?php
               for ($i = 0, $n = \count($languages); $i < $n; $i++) {
                 ?>
-
                 <div class="row">
                   <div class="col-md-1">
                     <div class="form-group row">
@@ -248,7 +249,19 @@
                     </div>
                   </div>
                 </div>
-
+              <div class="separator"></div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group row">
+                          <label for="<?php echo $CLICSHOPPING_Categories->getDef('text_categories_seo_url'); ?>"
+                                 class="col-1 col-form-label"><?php echo $CLICSHOPPING_Categories->getDef('text_categories_seo_url'); ?></label>
+                          <div class="col-md-8">
+                            <?php echo HTML::inputField('categories_seo_url[' . $languages[$i]['id'] . ']', null, 'maxlength="70" size="77" id="default_url_' . $i . '"', false); ?>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+             <div class="separator"></div>
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group row">
@@ -260,7 +273,7 @@
                     </div>
                   </div>
                 </div>
-
+            <div class="separator"></div>
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group row">
@@ -321,12 +334,12 @@
                 <div class="adminformAide">
                   <div class="row">
                     <span
-                      class="col-md-4 text-md-center float-start"><?php echo HTMLOverrideAdmin::fileFieldImageCkEditor('categories_image', null, '300', '300'); ?></span>
-                    <span class="col-md-8 text-md-center float-end">
+                      class="col-md-4 text-center float-start"><?php echo HTMLOverrideAdmin::fileFieldImageCkEditor('categories_image', null, '300', '300'); ?></span>
+                    <span class="col-md-8 text-center float-end">
                         <div class="col-md-12">
                           <?php echo $CLICSHOPPING_ProductsAdmin->getInfoImage(null, $CLICSHOPPING_Categories->getDef('text_categories_image_vignette')); ?>
                         </div>
-                        <div class="col-md-12 text-md-right">
+                        <div class="col-md-12 text-end">
                           <?php echo $CLICSHOPPING_Categories->getDef('text_categories_image_delete') . HTML::checkboxField('delete_image', 'yes', false); ?>
                         </div>
                       </span>
@@ -347,7 +360,7 @@
           //***********************************
           // extension
           //***********************************
-          echo $CLICSHOPPING_Hooks->output('Categories', 'Page', null, 'display');
+          echo $CLICSHOPPING_Hooks->output('Categories', 'PageContent', null, 'display');
         ?>
       </div>
     </div>

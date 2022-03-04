@@ -102,7 +102,7 @@
      * @param int|null $id
      * @return array
      */
-    public function getPathArray(int $id = null): array
+    public function getPathArray(?int $id = null): array
     {
       $CLICSHOPPING_CategoryCommon = Registry::get('CategoryCommon');
 
@@ -130,9 +130,9 @@
     /**
      * the category name
      *
-     * @param string $category_id , $language_id
+     * @param int $category_id , $language_id
+     * @param int $language_id
      * @return string $category['categories_name'],  name of the categorie
-     *
      */
     public function getCategoryName(int $category_id, int $language_id): string
     {
@@ -147,9 +147,9 @@
     /**
      * the category description
      *
-     * @param string $category_id , $language_id
+     * @param int $category_id , $language_id
+     * @param int $language_id
      * @return string $category['blog_categories_name'],  description of the blog categorie
-     *
      */
     public function getCategoryDescription(int $category_id, int $language_id) :string
     {
@@ -259,7 +259,7 @@
 
       $calculated_category_path_string = substr($calculated_category_path_string, 0, -6);
 
-      if (strlen($calculated_category_path_string) < 1) $calculated_category_path_string = $this->db->getDef('text_top');
+      if (\strlen($calculated_category_path_string) < 1) $calculated_category_path_string = $this->db->getDef('text_top');
 
       return $calculated_category_path_string;
     }
@@ -367,12 +367,12 @@
       if ($current_category_id == '') {
         $cPath_new = implode('_', $cPath_array);
       } else {
-        if (count($cPath_array) == 0) {
+        if (\count($cPath_array) == 0) {
           $cPath_new = $current_category_id;
         } else {
           $cPath_new = '';
 
-          $Qlast = $this->db->get('categories', 'parent_id', ['categories_id' => (int)$cPath_array[(count($cPath_array) - 1)]]);
+          $Qlast = $this->db->get('categories', 'parent_id', ['categories_id' => (int)$cPath_array[(\count($cPath_array) - 1)]]);
 
           $Qcurrent = $this->db->get('categories', 'parent_id', ['categories_id' => (int)$current_category_id]);
 
@@ -409,7 +409,7 @@
     {
 
       if (!\is_array($category_tree_array)) $category_tree_array = [];
-      if ((count($category_tree_array) < 1) && ($exclude != '0')) $category_tree_array[] = ['id' => '0', 'text' => CLICSHOPPING::getDef('text_top')];
+      if ((\count($category_tree_array) < 1) && ($exclude != '0')) $category_tree_array[] = ['id' => '0', 'text' => CLICSHOPPING::getDef('text_top')];
 
       if ($include_itself) {
         $Qcategory = $this->db->get('categories_description', 'categories_name', ['language_id' => $this->lang->getId(),
@@ -417,7 +417,8 @@
           ]
         );
 
-        $category_tree_array[] = ['id' => $parent_id,
+        $category_tree_array[] = [
+          'id' => $parent_id,
           'text' => $Qcategory->value('categories_name')
         ];
       }
@@ -461,12 +462,12 @@
       if (empty($current_category_id)) {
         $cPath_new = implode('_', $cPath_array);
       } else {
-        if (count($cPath_array) == 0) {
+        if (\count($cPath_array) == 0) {
           $cPath_new = $current_category_id;
         } else {
           $cPath_new = '';
 
-          $Qlast = $this->db->get('categories', 'parent_id', ['categories_id' => (int)$cPath_array[(count($cPath_array) - 1)]]);
+          $Qlast = $this->db->get('categories', 'parent_id', ['categories_id' => (int)$cPath_array[(\count($cPath_array) - 1)]]);
 
           $Qcurrent = $this->db->get('categories', 'parent_id', ['categories_id' => (int)$current_category_id]);
 
@@ -530,7 +531,8 @@
                 ]
             );
 
-            $categories_array[$index][] = ['id' => $Qcategories->valueInt('categories_id'),
+            $categories_array[$index][] = [
+              'id' => $Qcategories->valueInt('categories_id'),
               'text' => $Qcategory->value('categories_name')
             ];
 
@@ -545,7 +547,8 @@
           $index++;
         }
       } elseif ($from == 'category') {
-        $Qcategory = $this->db->get(['categories c',
+        $Qcategory = $this->db->get([
+          'categories c',
           'categories_description cd'
         ], [
           'cd.categories_name',
@@ -593,7 +596,7 @@
 
       $calculated_category_path_string = substr($calculated_category_path_string, 0, -6);
 
-      if (strlen($calculated_category_path_string) < 1) $calculated_category_path_string = CLICSHOPPING::getDef('text_top');
+      if (\strlen($calculated_category_path_string) < 1) $calculated_category_path_string = CLICSHOPPING::getDef('text_top');
 
       return $calculated_category_path_string;
     }
